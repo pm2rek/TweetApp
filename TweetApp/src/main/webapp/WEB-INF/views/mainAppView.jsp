@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="./user/list"> Users</a>
-	<a href="./tweet/list"> Tweets</a>
+	<a href="./users/list"> Users</a>
+	<a href="./tweets/list"> Tweets</a>
 </body>
 </html>

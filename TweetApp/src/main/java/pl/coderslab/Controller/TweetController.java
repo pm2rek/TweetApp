@@ -43,7 +43,7 @@ public class TweetController {
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String showAddTweetForm(Model model) {
 		model.addAttribute("tweet", new Tweet());
-		model.addAttribute("path", "/tweet");
+		model.addAttribute("path", "/tweets");
 		return "tweetForm";
 	}
 
@@ -60,7 +60,7 @@ public class TweetController {
 	@RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
 	public String editTweet( Model model, @PathVariable Long id) {
 		model.addAttribute("tweet", tweetRepository.findOne(id));
-		model.addAttribute("path", "");
+		model.addAttribute("path", "/tweets");
 		return "tweetForm";
 	}
 

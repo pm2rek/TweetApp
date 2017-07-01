@@ -32,7 +32,7 @@ public class UserController {
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String showAddUserForm(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("path", "/user");
+		model.addAttribute("path", "/users");
 		return "userForm";
 	}
 
@@ -49,7 +49,7 @@ public class UserController {
 	@RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
 	public String editUser(Model model, @PathVariable Long id) {
 		model.addAttribute("user", userRepository.findOne(id));
-		model.addAttribute("path", "");
+		model.addAttribute("path", "/users");
 		return "userForm";
 	}
 
