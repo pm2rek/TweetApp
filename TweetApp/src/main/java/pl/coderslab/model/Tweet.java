@@ -71,5 +71,13 @@ public class Tweet {
 	public String toString() {
 		return "Tweet [id=" + id + ", title=" + title + ", tweetText=" + tweetText + ", created=" + created + "]";
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }
