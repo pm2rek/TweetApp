@@ -42,7 +42,7 @@ public class UserController {
 			return "userForm";
 		}
 		userRepository.save(user);
-		return "redirect:/user/list";
+		return "redirect:/users/list";
 	}
 	
 	// EDIT
@@ -59,7 +59,7 @@ public class UserController {
 			return "userForm";
 		}
 		userRepository.save(user);
-		return "redirect:/user/list";
+		return "redirect:/users/list";
 	}
 
 	// DELETE
@@ -72,6 +72,6 @@ public class UserController {
 	@RequestMapping(path = "/delete/{id}", method = RequestMethod.POST)
 	public String processRemoveUser(@ModelAttribute User user) {
 		userRepository.delete(user);
-		return "redirect:/user/list";
+		return "redirect:/users/list";
 	}
 }
