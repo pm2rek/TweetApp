@@ -26,7 +26,7 @@ public class User {
 	@NotBlank(message="nie moge byc puste")
 	private String lastName;
 	
-	@Email
+	@Email(message="Podaj wlasciwy email")
 	@Column(unique=true)
 	private String email;
 	
