@@ -19,7 +19,7 @@
 		<c:forEach items="${tweet}" var="tweet">
 			<tr>
 				<td>${tweet.title}</td>
-				<td>${tweet.tweet_text}</td>
+				<td>${tweet.tweetText}</td>
 				<td>${tweet.user.firstName} ${tweet.user.lastName}</td>
 				<td>${tweet.created}</td>
 				<td><a href="edit/${tweet.id}" />edit</td>
