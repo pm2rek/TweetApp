@@ -32,7 +32,7 @@ public class Tweet {
 	@CreationTimestamp
 	private Date created;
 	
-	@OneToMany(mappedBy="post")
+	@OneToMany(mappedBy="tweet")
 	private List<Comment> comments = new ArrayList<>();
 	
 	public Long getId() {
@@ -70,6 +70,14 @@ public class Tweet {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 }

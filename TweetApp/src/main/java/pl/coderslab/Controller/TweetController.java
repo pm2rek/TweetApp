@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pl.coderslab.model.Comment;
 import pl.coderslab.model.Tweet;
 import pl.coderslab.model.User;
+import pl.coderslab.repository.CommentRepository;
 import pl.coderslab.repository.TweetRepository;
 import pl.coderslab.repository.UserRepository;
 
@@ -27,6 +29,9 @@ public class TweetController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@ModelAttribute("users")
 	public List<User> getAllUsers() {
@@ -37,18 +42,40 @@ public class TweetController {
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public String showTweets(Model model, HttpServletRequest request) {
 		model.addAttribute("tweet", tweetRepository.findAllByOrderByCreatedDesc());
-		Tweet tweet = new Tweet();
-		tweet.setUser(userRepository.findOne(((Long) request.getSession().getAttribute("userId"))));
-		model.addAttribute("newTweet", tweet);
+		model.addAttribute("newTweet", new Tweet());
 		return "tweetList";
 	}
-
+	
+	//COMMENTS
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public String showComments(@PathVariable Long id, Model model) {
+		model.addAttribute("tweet", tweetRepository.findOne(id));
+		model.addAttribute("comments", commentRepository.findAll());
+		model.addAttribute("comment", new Comment());
+		model.addAttribute("path", "/tweets");
+		return "tweet";
+	}
+	//ADD COMMENT
+	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
+	public String addComment(@Valid @ModelAttribute Comment comment, BindingResult result, Model model,
+							@PathVariable Long id, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			return "tweet";
+		}
+		comment.setTweet(tweetRepository.findOne(id));
+		comment.setUser(userRepository.findOne(((Long) request.getSession().getAttribute("userId"))));
+		commentRepository.save(comment);
+		return "redirect:/tweets/"+id;
+	}
+	
 	// ADD
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
-	public String processAddTweetFromList(@Valid @ModelAttribute Tweet tweet, BindingResult result, Model model) {
+	public String processAddTweetFromList(@Valid @ModelAttribute Tweet tweet, BindingResult result,
+											Model model, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "tweetList";
 		}
+		tweet.setUser(userRepository.findOne(((Long) request.getSession().getAttribute("userId"))));
 		tweetRepository.save(tweet);
 		return "redirect:/tweets/list";
 	}

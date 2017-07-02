@@ -9,6 +9,6 @@ import pl.coderslab.model.Tweet;
 
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
-	List<Comment> findByPostOrderByCreatedDesc(Tweet post);
-	List<Comment> findByPostIdOrderByCreatedDesc(Long id);
+	List<Comment> findByTweetOrderByCreatedDesc(Tweet post);
+	List<Comment> findByTweetIdOrderByCreatedDesc(Long id);
 }

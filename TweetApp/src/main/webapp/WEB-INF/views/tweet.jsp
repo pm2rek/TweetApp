@@ -15,24 +15,34 @@
 			<th>USER</th>
 			<th>CREATED</th>
 		</tr>
-		<c:forEach items="${tweet}" var="tweet">
 			<tr>
-				<td><a href="${tweet.id}">${tweet.text}</a></td>
-				<td><a href="../users/${tweet.user.id}">${tweet.user.firstName} ${tweet.user.lastName}</a></td>
+				<td>${tweet.text}</td>
+				<td>${tweet.user.firstName} ${tweet.user.lastName}</td>
 				<td>${tweet.created}</td>
 				<td><a href="edit/${tweet.id}" />edit</td>
 				<td><a href="delete/${tweet.id}" />delete</td>
 			</tr>
-		</c:forEach>
 	</table>
-	<form:form method="post" modelAttribute="newTweet">
+		<table>
+		<tr>
+			<th>TEXT</th>
+			<th>USER</th>
+			<th>CREATED</th>
+		</tr>
+		<c:forEach items="${comments}" var="comment">
+			<tr>
+				<td>${comment.text}</td>
+				<td>${comment.user.firstName} ${comment.user.lastName}</td>
+				<td>${comment.created}</td>
+			</tr>
+			</c:forEach>
+	</table>
+	<form:form method="post" modelAttribute="comment">
 		<form:errors path="text" cssClass="error" element="div" />
-		Text:<form:input path="text" /><br>
+		Comment: <form:input path="text" /><br>
 		<input type="submit" value="Submit">
 
 	</form:form>
-	<a href="add"> Add new tweet</a>
-	<br>
 	<a href="../"> Back to main menu</a>
 </body>
 </html>

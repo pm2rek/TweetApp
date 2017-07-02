@@ -23,7 +23,7 @@ public class Comment {
 	private User user;
 	
 	@ManyToOne
-	private Tweet post;
+	private Tweet tweet;
 	
 	@CreationTimestamp
 	private Date created;
@@ -44,11 +44,12 @@ public class Comment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Tweet getPost() {
-		return post;
+
+	public Tweet getTweet() {
+		return tweet;
 	}
-	public void setPost(Tweet post) {
-		this.post = post;
+	public void setTweet(Tweet tweet) {
+		this.tweet = tweet;
 	}
 	public Date getCreated() {
 		return created;
