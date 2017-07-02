@@ -10,8 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,12 +19,8 @@ public class Tweet {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min = 5, max=50, message="zly rozmiar")
-	private String title;
-	
-	@NotEmpty
-	@Size(max=16, message="Max 16 znakow")
-	private String tweetText;
+	@Size(min = 5, max=140, message="zly rozmiar")
+	private String text;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -43,20 +37,12 @@ public class Tweet {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getText() {
+		return text;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTweetText() {
-		return tweetText;
-	}
-
-	public void setTweetText(String tweetText) {
-		this.tweetText = tweetText;
+	public void setText(String title) {
+		this.text = title;
 	}
 
 	public Date getCreated() {
@@ -69,7 +55,7 @@ public class Tweet {
 
 	@Override
 	public String toString() {
-		return "Tweet [id=" + id + ", title=" + title + ", tweetText=" + tweetText + ", created=" + created + "]";
+		return "Tweet [id=" + id + ", title=" + text + ", created=" + created + "]";
 	}
 
 	public User getUser() {

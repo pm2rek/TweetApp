@@ -11,15 +11,13 @@
 <body>
 	<table>
 		<tr>
-			<th>TITLE</th>
 			<th>TEXT</th>
 			<th>USER</th>
 			<th>CREATED</th>
 		</tr>
 		<c:forEach items="${tweet}" var="tweet">
 			<tr>
-				<td>${tweet.title}</td>
-				<td>${tweet.tweetText}</td>
+				<td>${tweet.text}</td>
 				<td>${tweet.user.firstName} ${tweet.user.lastName}</td>
 				<td>${tweet.created}</td>
 				<td><a href="edit/${tweet.id}" />edit</td>

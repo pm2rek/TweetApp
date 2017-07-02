@@ -9,10 +9,8 @@
 </head>
 <body>
 <form:form method="post" modelAttribute="tweet">
-		<form:errors path="title" cssClass="error" element="div" />
-		Title:<form:input path="title" /><br>
-		<form:errors path="tweetText" cssClass="error" element="div"/>
-		Text: <form:input path="tweetText" /><br>
+		<form:errors path="text" cssClass="error" element="div" />
+		Text:<form:input path="text" /><br>
 		<form:errors path="user" cssClass="error" element="div"/>
 		User: <form:select path="user.id" items="${users}" itemlabel="fullName" itemValue="id"/><br>
 		<input type="submit" value="Submit">
