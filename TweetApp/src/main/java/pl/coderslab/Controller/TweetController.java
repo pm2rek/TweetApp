@@ -85,4 +85,11 @@ public class TweetController {
 		tweetRepository.delete(tweet);
 		return "redirect:/tweets/list";
 	}
+	
+	//FIND BY USER ID
+	@RequestMapping(path = "/list/{id}", method = RequestMethod.GET)
+	public String showTweetsByUserId(@PathVariable Long id, Model model) {
+		model.addAttribute("tweet", tweetRepository.findByUserId(id));
+		return "tweetList";
+	}
 }
