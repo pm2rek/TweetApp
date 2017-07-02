@@ -2,6 +2,7 @@ package pl.coderslab.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,24 @@ public class TweetController {
 
 	// LIST
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public String showTweets(Model model) {
-		model.addAttribute("tweet", tweetRepository.findAll());
+	public String showTweets(Model model, HttpServletRequest request) {
+		model.addAttribute("tweet", tweetRepository.findAllByOrderByCreatedDesc());
+		Tweet tweet = new Tweet();
+		tweet.setUser(userRepository.findOne(((Long) request.getSession().getAttribute("userId"))));
+		model.addAttribute("newTweet", tweet);
 		return "tweetList";
 	}
 
 	// ADD
+	@RequestMapping(path = "/list", method = RequestMethod.POST)
+	public String processAddTweetFromList(@Valid @ModelAttribute Tweet tweet, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "tweetList";
+		}
+		tweetRepository.save(tweet);
+		return "redirect:/tweets/list";
+	}
+	
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String showAddTweetForm(Model model) {
 		model.addAttribute("tweet", new Tweet());
