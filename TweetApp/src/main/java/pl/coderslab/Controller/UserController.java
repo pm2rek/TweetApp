@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.coderslab.model.User;
+import pl.coderslab.repository.TweetRepository;
 import pl.coderslab.repository.UserRepository;
 
 @Controller
@@ -21,6 +22,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private TweetRepository tweetRepository;
 	// LIST
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public String showUsers(Model model) {
@@ -28,6 +31,12 @@ public class UserController {
 		return "userList";
 	}
 
+	//USER
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public String showUser(Model model, @PathVariable Long id) {
+		model.addAttribute("tweet", tweetRepository.findByUserIdOrderByCreatedDesc(id));
+		return "tweetListNoForm";
+	}
 	// ADD
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
 	public String showAddUserForm(Model model) {

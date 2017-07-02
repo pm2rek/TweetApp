@@ -24,16 +24,7 @@
 				<td><a href="delete/${tweet.id}" />delete</td>
 			</tr>
 		</c:forEach>
-	</table>
-	<form:form method="post" modelAttribute="newTweet">
-		<form:errors path="text" cssClass="error" element="div" />
-		Text:<form:input path="text" /><br>
-		<form:hidden path="user.id"/>
-		<input type="submit" value="Submit">
-
-	</form:form>
-	<a href="add"> Add new tweet</a>
-	<br>
+		</table>
 	<a href="../"> Back to main menu</a>
 </body>
 </html>
