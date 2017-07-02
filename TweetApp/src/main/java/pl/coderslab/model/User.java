@@ -21,7 +21,7 @@ public class User {
 	private Long id;
 	
 	@NotBlank(message="nie moge byc puste")
-	private String userName;
+	private String login;
 	
 	private String firstName;
 	
@@ -67,6 +67,30 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<Tweet> getTweets() {
+		return tweets;
+	}
+
+	public void setTweets(List<Tweet> tweets) {
+		this.tweets = tweets;
 	}
 
 	@Override
