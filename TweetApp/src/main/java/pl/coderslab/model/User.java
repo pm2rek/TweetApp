@@ -21,9 +21,13 @@ public class User {
 	private Long id;
 	
 	@NotBlank(message="nie moge byc puste")
+	private String userName;
+	
 	private String firstName;
 	
 	@NotBlank(message="nie moge byc puste")
+	private String password;
+	
 	private String lastName;
 	
 	@Email(message="Podaj wlasciwy email")
