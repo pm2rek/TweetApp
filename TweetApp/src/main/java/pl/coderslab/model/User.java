@@ -39,7 +39,13 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments = new ArrayList<>();
-
+	
+	@OneToMany(mappedBy="sender")
+	private List<Message> inbox = new ArrayList<>();
+	
+	@OneToMany(mappedBy="recipient")
+	private List<Message> outbox = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -102,6 +108,22 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public List<Message> getInbox() {
+		return inbox;
+	}
+
+	public void setInbox(List<Message> inbox) {
+		this.inbox = inbox;
+	}
+
+	public List<Message> getOutbox() {
+		return outbox;
+	}
+
+	public void setOutbox(List<Message> outbox) {
+		this.outbox = outbox;
 	}
 
 	@Override
