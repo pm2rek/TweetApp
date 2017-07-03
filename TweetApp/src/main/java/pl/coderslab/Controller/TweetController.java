@@ -29,9 +29,6 @@ public class TweetController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired
-	private CommentRepository commentRepository;
 
 	@ModelAttribute("users")
 	public List<User> getAllUsers() {
@@ -44,28 +41,6 @@ public class TweetController {
 		model.addAttribute("tweet", tweetRepository.findAllByOrderByCreatedDesc());
 		model.addAttribute("newTweet", new Tweet());
 		return "tweetList";
-	}
-	
-	//COMMENTS
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public String showComments(@PathVariable Long id, Model model) {
-		model.addAttribute("tweet", tweetRepository.findOne(id));
-		model.addAttribute("comments", commentRepository.findAll());
-		model.addAttribute("comment", new Comment());
-		model.addAttribute("path", "/tweets");
-		return "tweet";
-	}
-	//ADD COMMENT
-	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
-	public String addComment(@Valid @ModelAttribute Comment comment, BindingResult result, Model model,
-							@PathVariable Long id, HttpServletRequest request) {
-		if (result.hasErrors()) {
-			return "tweet";
-		}
-		comment.setTweet(tweetRepository.findOne(id));
-		comment.setUser(userRepository.findOne(((Long) request.getSession().getAttribute("userId"))));
-		commentRepository.save(comment);
-		return "redirect:/tweets/"+id;
 	}
 	
 	// ADD
